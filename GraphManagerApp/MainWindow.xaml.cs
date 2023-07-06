@@ -15,7 +15,36 @@ public partial class MainWindow : Window {
         InitializeComponent();
     }
 
-    private void SelectOrAction(object sender, MouseButtonEventArgs e) {
+    private void SetAddNodeMode(object sender, RoutedEventArgs e) {
+        MyCanvas.MouseDown += OnClickAddNode;
+    }
+
+    private void OnClickAddNode(object sender, MouseButtonEventArgs e) {
+        AddCircle(MyCanvas,
+            Mouse.GetPosition(MyCanvas).X,
+            Mouse.GetPosition(MyCanvas).Y, 50);
+
+        MyCanvas.MouseDown -= OnClickAddNode;
+    }
+
+    private void SetRemoveMode(object sender, RoutedEventArgs e) {
+        MyCanvas.MouseDown += OnClickRemove;
+    }
+
+    private void OnClickRemove(object sender, MouseButtonEventArgs e) {
+        if (e.OriginalSource is Shape) {
+            Shape activeRec = (Shape)e.OriginalSource;
+            MyCanvas.Children.Remove(activeRec);
+
+            MyCanvas.MouseDown -= OnClickRemove;
+        }
+    }
+
+    private void SetAddEdgeMode(object sender, RoutedEventArgs e) {
+        throw new NotImplementedException();
+    }
+
+    private void MouseAddOrDelete(object sender, MouseButtonEventArgs e) {
         if (e.OriginalSource is Shape) {
             Shape activeRec = (Shape)e.OriginalSource;
             MyCanvas.Children.Remove(activeRec);

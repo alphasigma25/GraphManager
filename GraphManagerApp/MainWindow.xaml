@@ -4,12 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        <Canvas x:Name="MyCanvas" MouseLeftButtonDown="SelectOrAction" Focusable="True" HorizontalAlignment="Left" Height="357" Margin="29,0,0,0" VerticalAlignment="Center" Width="497" Background="#FFF8F8F8" Cursor="Cross"/>
-        <Button Content="+ Node" HorizontalAlignment="Left" Height="39" Margin="590,65,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button Content="+ Edge" HorizontalAlignment="Left" Height="39" Margin="590,140,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button Content="Remove" HorizontalAlignment="Left" Height="39" Margin="590,217,0,0" VerticalAlignment="Top" Width="150"/>
+        <Canvas x:Name="MyCanvas" Focusable="True" HorizontalAlignment="Left" Height="357" Margin="29,0,0,0" VerticalAlignment="Center" Width="497" Background="#FFF8F8F8" Cursor="Cross"/>
+        <Button x:Name="BtnAddNode" Click="SetAddNodeMode" Content="+ Node" HorizontalAlignment="Left" Height="39" Margin="590,65,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="BtnAddEdge" Click="SetAddEdgeMode" Content="+ Edge" HorizontalAlignment="Left" Height="39" Margin="590,140,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="BtnRemove" Click="SetRemoveMode" Content="Remove" HorizontalAlignment="Left" Height="39" Margin="590,217,0,0" VerticalAlignment="Top" Width="150"/>
         <TextBlock HorizontalAlignment="Left" Margin="590,285,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="111" Width="150"/>
     </Grid>
 </Window>
