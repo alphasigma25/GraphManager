@@ -5,8 +5,8 @@ namespace GraphManagerTest {
     public class EdgeTest {
         [TestMethod]
         public void CreateEdge() {
-            Node n1 = new(0);
-            Node n2 = new(1);
+            Node n1 = new();
+            Node n2 = new();
 
             Edge e = new(n1, n2);
 
