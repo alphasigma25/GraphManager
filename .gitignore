@@ -2,3 +2,6 @@
 GraphManagerApp/bin/
 GraphManagerApp/obj/
 SimpleGraph/obj/
+GraphManagerTest/bin/
+GraphManagerTest/obj/
+packages/

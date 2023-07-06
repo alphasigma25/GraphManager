@@ -4,8 +4,8 @@ namespace GraphManagerApp.Model;
 
 public class Node {
 
-    public Node() {
-        Id = NodesCount++;
+    public Node(int id) {
+        Id = id;
         Edges = new List<Edge>();
     }
 
@@ -25,7 +25,5 @@ public class Node {
         });
         return nodes;
     }
-
-    private static int NodesCount = 0;
 }
 

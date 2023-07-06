@@ -8,8 +8,13 @@ public class Graph {
         Edges = new List<Edge>();
     }
 
-    public void AddNode() {
-        Nodes.Add(new Node());
+    public int NodesCount { get { return Nodes.Count; } }
+    public int EdgeCount { get { return Edges.Count; } }
+
+    public Node AddNode() {
+        Node n = new(NodesCount + 1);
+        Nodes.Add(n);
+        return n;
     }
 
     public void DeleteNode(Node n) {
@@ -18,7 +23,7 @@ public class Graph {
     }
 
     public void AddEdge(Node n1, Node n2) {
-        Edges.Add(new Edge(n1, n2));
+        Edges.Add(new Edge(EdgeCount + 1, n1, n2));
     }
 
     public void DeleteEdge(Edge e) {
