@@ -4,12 +4,19 @@ namespace GraphManagerApp.Model;
 
 public class Node {
 
-    public Node(int id) {
-        Id = id;
-        Edges = new List<Edge>();
+    public Node() {
+        Id = NodesCount++;
+        Edges = new();
     }
 
     public void Delete() {
+        Edges.ForEach(e => {
+            if (e.N1.Id != Id) {
+                e.N1.Edges.Remove(e);
+            } else if (e.N2.Id != Id) {
+                e.N2.Edges.Remove(e);
+            }
+        });
         Edges.Clear();
     }
 
@@ -17,7 +24,7 @@ public class Node {
     public List<Edge> Edges { get; set; }
 
     public List<Node> Neighbours() {
-        List<Node> nodes = new List<Node>();
+        List<Node> nodes = new();
         Edges.ForEach(e => {
             if (e.N1.Id == Id || e.N2.Id == Id) {
                 nodes.Add(this);
@@ -25,5 +32,7 @@ public class Node {
         });
         return nodes;
     }
+
+    private static int NodesCount = 0;
 }
 

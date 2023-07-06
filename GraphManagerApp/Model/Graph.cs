@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 
 namespace GraphManagerApp.Model;
-public class Graph {
 
+//finalement pas besoin
+
+public class Graph {
     public Graph() {
+        //utiliser des ObservableCollection plus tard plutôt que List
         Nodes = new List<Node>();
         Edges = new List<Edge>();
     }
@@ -12,7 +15,7 @@ public class Graph {
     public int EdgeCount { get { return Edges.Count; } }
 
     public Node AddNode() {
-        Node n = new(NodesCount + 1);
+        Node n = new();
         Nodes.Add(n);
         return n;
     }
@@ -23,7 +26,7 @@ public class Graph {
     }
 
     public void AddEdge(Node n1, Node n2) {
-        Edges.Add(new Edge(EdgeCount + 1, n1, n2));
+        Edges.Add(new Edge(n1, n2));
     }
 
     public void DeleteEdge(Edge e) {
@@ -34,4 +37,3 @@ public class Graph {
     private List<Edge> Edges;
 
 }
-
