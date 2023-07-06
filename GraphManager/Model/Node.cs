@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace GraphManager;
+namespace GraphManager.Model;
 
 public class Node {
-
-    public Node() {
-        Edges = new();
-    }
 
     public void Delete() {
         Edges.ForEach(e => {
@@ -19,7 +15,7 @@ public class Node {
         Edges.Clear();
     }
 
-    public List<Edge> Edges { get; set; }
+    public List<Edge> Edges { get; set; } = new();
 
     public IEnumerable<Node> Neighbours() {
         foreach (var e in Edges) {

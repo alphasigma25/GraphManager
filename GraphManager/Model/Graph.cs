@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GraphManager;
+namespace GraphManager.Model;
 
 //finalement pas besoin
 
