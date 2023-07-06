@@ -16,10 +16,8 @@ public partial class MainWindow : Window {
         InitializeComponent();
     }
 
-
-
     private void OnClickAddNode(object sender, MouseButtonEventArgs e) {
-        AddCircle(MyCanvas,
+        AddNodeOnCanvas(MyCanvas,
             Mouse.GetPosition(MyCanvas).X,
             Mouse.GetPosition(MyCanvas).Y, 50);
     }
@@ -31,48 +29,35 @@ public partial class MainWindow : Window {
         }
     }
 
+
+    private Point startPoint;
+
     private void OnClickAddEdge(object sender, MouseButtonEventArgs e) {
-        throw new NotImplementedException();
+
+        Ellipse el = (Ellipse)sender;
+
+        double cx = Canvas.GetLeft(el) + el.Width / 2;
+        double cy = Canvas.GetTop(el) + el.Height / 2;
+
+        if (startPoint == default) {
+            startPoint = new Point(cx, cy);
+        } else {
+            AddLine(MyCanvas, startPoint.X, startPoint.Y, cx, cy);
+
+            startPoint = default;
+        }
     }
+
     private void ManageLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        // TODO amélioration : https://stackoverflow.com/questions/9212873/binding-radiobuttons-group-to-a-property-in-wpf
         if (AddNode.IsChecked == true) {
             OnClickAddNode(sender, e);
-        } else if (AddEdge.IsChecked == true) {
-            OnClickAddEdge(sender, e);
         } else if (Remove.IsChecked == true) {
             OnClickRemove(sender, e);
         }
     }
-    private void MouseAddOrDelete(object sender, MouseButtonEventArgs e) {
-        if (e.OriginalSource is Shape) {
-            Shape activeRec = (Shape)e.OriginalSource;
-            MyCanvas.Children.Remove(activeRec);
-        } else {
 
-        }
-    }
-    private void ToggleButtonManageClick(ToggleButton button, Action OnCheck, Action OnUnckeck) {
-        if (button.IsChecked == true) {
-            OnCheck.Invoke();
-        }
-        if (button.IsChecked == false) {
-            OnUnckeck.Invoke();
-        }
-    }
-    private void AddRectangle(Canvas myCanvas, double cx, double cy, int w, int h) {
-        Rectangle newRec = new Rectangle {
-            Width = w,
-            Height = h,
-            Fill = Brushes.White,
-            StrokeThickness = 1,
-            Stroke = Brushes.Black
-        };
-
-        Canvas.SetLeft(newRec, cx);
-        Canvas.SetTop(newRec, cy);
-        myCanvas.Children.Add(newRec);
-    }
-    private void AddCircle(Canvas myCanvas, double cx, double cy, double r) {
+    private void AddNodeOnCanvas(Canvas myCanvas, double cx, double cy, double r) {
         Ellipse newCir = new Ellipse {
             Width = r,
             Height = r,
@@ -81,9 +66,29 @@ public partial class MainWindow : Window {
             Stroke = Brushes.Black
         };
 
+        newCir.MouseDown += (object sender, MouseButtonEventArgs e) => {
+            if (AddEdge.IsChecked == true) {
+                OnClickAddEdge(sender, e);
+            };
+        };
+
         Canvas.SetLeft(newCir, cx - r / 2);
         Canvas.SetTop(newCir, cy - r / 2);
         myCanvas.Children.Add(newCir);
+    }
+
+    private void AddLine(Canvas myCanvas, double x1, double y1, double x2, double y2) {
+        Line line = new Line {
+            X1 = x1,
+            Y1 = y1,
+            X2 = x2,
+            Y2 = y2,
+            Stroke = Brushes.Black,
+            StrokeThickness = 1
+        };
+
+        Panel.SetZIndex(line, -1);
+        myCanvas.Children.Add(line);
     }
 
 

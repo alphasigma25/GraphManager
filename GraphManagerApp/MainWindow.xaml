@@ -12,6 +12,5 @@
             <RadioButton x:Name="AddEdge" GroupName="CanvasManager" Content="Add Edge"></RadioButton>
             <RadioButton x:Name="Remove" GroupName="CanvasManager" Content="Remove"></RadioButton>
         </StackPanel>
-        <TextBlock HorizontalAlignment="Left" Margin="576,312,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="84" Width="178"/>
     </Grid>
 </Window>
