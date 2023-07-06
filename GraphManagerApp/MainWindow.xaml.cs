@@ -16,22 +16,12 @@ public partial class MainWindow : Window {
         InitializeComponent();
     }
 
-    private void SetAddNodeMode(object sender, RoutedEventArgs e) {
-        ToggleButtonManageClick(BtnAddNode,
-            () => MyCanvas.MouseDown += OnClickAddNode,
-            () => MyCanvas.MouseDown -= OnClickAddNode);
-    }
+
 
     private void OnClickAddNode(object sender, MouseButtonEventArgs e) {
         AddCircle(MyCanvas,
             Mouse.GetPosition(MyCanvas).X,
             Mouse.GetPosition(MyCanvas).Y, 50);
-    }
-
-    private void SetRemoveMode(object sender, RoutedEventArgs e) {
-        ToggleButtonManageClick(BtnRemove,
-            () => MyCanvas.MouseDown += OnClickRemove,
-            () => MyCanvas.MouseDown -= OnClickRemove);
     }
 
     private void OnClickRemove(object sender, MouseButtonEventArgs e) {
@@ -41,27 +31,26 @@ public partial class MainWindow : Window {
         }
     }
 
-    private void SetAddEdgeMode(object sender, RoutedEventArgs e) {
-        ToggleButtonManageClick(BtnAddEdge,
-            () => MyCanvas.MouseDown += OnClickAddEdge,
-            () => MyCanvas.MouseDown -= OnClickAddEdge);
-    }
-
     private void OnClickAddEdge(object sender, MouseButtonEventArgs e) {
         throw new NotImplementedException();
     }
-
+    private void ManageLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        if (AddNode.IsChecked == true) {
+            OnClickAddNode(sender, e);
+        } else if (AddEdge.IsChecked == true) {
+            OnClickAddEdge(sender, e);
+        } else if (Remove.IsChecked == true) {
+            OnClickRemove(sender, e);
+        }
+    }
     private void MouseAddOrDelete(object sender, MouseButtonEventArgs e) {
         if (e.OriginalSource is Shape) {
             Shape activeRec = (Shape)e.OriginalSource;
             MyCanvas.Children.Remove(activeRec);
         } else {
-            AddCircle(MyCanvas,
-                Mouse.GetPosition(MyCanvas).X,
-                Mouse.GetPosition(MyCanvas).Y, 50);
+
         }
     }
-
     private void ToggleButtonManageClick(ToggleButton button, Action OnCheck, Action OnUnckeck) {
         if (button.IsChecked == true) {
             OnCheck.Invoke();
@@ -70,7 +59,6 @@ public partial class MainWindow : Window {
             OnUnckeck.Invoke();
         }
     }
-
     private void AddRectangle(Canvas myCanvas, double cx, double cy, int w, int h) {
         Rectangle newRec = new Rectangle {
             Width = w,
@@ -97,6 +85,8 @@ public partial class MainWindow : Window {
         Canvas.SetTop(newCir, cy - r / 2);
         myCanvas.Children.Add(newCir);
     }
+
+
 }
 
 
