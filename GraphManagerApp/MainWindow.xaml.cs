@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -16,31 +17,37 @@ public partial class MainWindow : Window {
     }
 
     private void SetAddNodeMode(object sender, RoutedEventArgs e) {
-        MyCanvas.MouseDown += OnClickAddNode;
+        ToggleButtonManageClick(BtnAddNode,
+            () => MyCanvas.MouseDown += OnClickAddNode,
+            () => MyCanvas.MouseDown -= OnClickAddNode);
     }
 
     private void OnClickAddNode(object sender, MouseButtonEventArgs e) {
         AddCircle(MyCanvas,
             Mouse.GetPosition(MyCanvas).X,
             Mouse.GetPosition(MyCanvas).Y, 50);
-
-        MyCanvas.MouseDown -= OnClickAddNode;
     }
 
     private void SetRemoveMode(object sender, RoutedEventArgs e) {
-        MyCanvas.MouseDown += OnClickRemove;
+        ToggleButtonManageClick(BtnRemove,
+            () => MyCanvas.MouseDown += OnClickRemove,
+            () => MyCanvas.MouseDown -= OnClickRemove);
     }
 
     private void OnClickRemove(object sender, MouseButtonEventArgs e) {
         if (e.OriginalSource is Shape) {
             Shape activeRec = (Shape)e.OriginalSource;
             MyCanvas.Children.Remove(activeRec);
-
-            MyCanvas.MouseDown -= OnClickRemove;
         }
     }
 
     private void SetAddEdgeMode(object sender, RoutedEventArgs e) {
+        ToggleButtonManageClick(BtnAddEdge,
+            () => MyCanvas.MouseDown += OnClickAddEdge,
+            () => MyCanvas.MouseDown -= OnClickAddEdge);
+    }
+
+    private void OnClickAddEdge(object sender, MouseButtonEventArgs e) {
         throw new NotImplementedException();
     }
 
@@ -52,6 +59,15 @@ public partial class MainWindow : Window {
             AddCircle(MyCanvas,
                 Mouse.GetPosition(MyCanvas).X,
                 Mouse.GetPosition(MyCanvas).Y, 50);
+        }
+    }
+
+    private void ToggleButtonManageClick(ToggleButton button, Action OnCheck, Action OnUnckeck) {
+        if (button.IsChecked == true) {
+            OnCheck.Invoke();
+        }
+        if (button.IsChecked == false) {
+            OnUnckeck.Invoke();
         }
     }
 
