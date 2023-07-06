@@ -1,7 +1,8 @@
-using GraphManager;
+using GraphManager.Model;
 
 // pas besoin
-namespace GraphManagerTest {
+namespace GraphManagerTest
+{
     [TestClass]
     public class GraphTest {
         [TestMethod]
