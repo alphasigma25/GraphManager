@@ -4,13 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize">
-    <Grid>
-        <Canvas x:Name="MyCanvas" MouseLeftButtonDown="ManageLeftButtonDown" Focusable="True" HorizontalAlignment="Left" Height="357" Margin="29,0,0,0" VerticalAlignment="Center" Width="497" Background="#FFF8F8F8" Cursor="Cross"/>
-        <StackPanel Margin="576,75,46,286" >
-            <RadioButton x:Name="AddNode" GroupName="CanvasManager" Content="Add Node"></RadioButton>
-            <RadioButton x:Name="AddEdge" GroupName="CanvasManager" Content="Add Edge"></RadioButton>
-            <RadioButton x:Name="Remove" GroupName="CanvasManager" Content="Remove"></RadioButton>
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="5" VerticalAlignment="center">
+            <RadioButton x:Name="AddNode" GroupName="CanvasManager" Content="Add Node" Margin="5"></RadioButton>
+            <RadioButton x:Name="AddEdge" GroupName="CanvasManager" Content="Add Edge" Margin="5"></RadioButton>
+            <RadioButton x:Name="Remove" GroupName="CanvasManager" Content="Remove" Margin="5"></RadioButton>
         </StackPanel>
-    </Grid>
+        <Canvas x:Name="MyCanvas" MouseLeftButtonDown="ManageLeftButtonDown" 
+                Focusable="True" HorizontalAlignment="Stretch" Margin="20"
+                VerticalAlignment="Stretch" Background="#FFF8F8F8" 
+                Cursor="Cross"/>
+    </DockPanel>
 </Window>
