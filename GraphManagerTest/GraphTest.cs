@@ -1,4 +1,4 @@
-using GraphManagerApp.Model;
+using GraphManager;
 
 // pas besoin
 namespace GraphManagerTest {

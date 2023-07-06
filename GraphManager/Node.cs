@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GraphManagerApp.Model;
+namespace GraphManager;
 
 public class Node {
 
