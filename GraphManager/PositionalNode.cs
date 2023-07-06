@@ -1,7 +1,7 @@
 ﻿using GraphManager.Model;
 
 namespace GraphManager;
-internal class PositionalNode {
+public class PositionalNode {
     public Node Node { get; }
     public double X { get; set; }
     public double Y { get; set; }

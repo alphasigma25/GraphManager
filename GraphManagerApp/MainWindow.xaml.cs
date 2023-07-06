@@ -11,18 +11,21 @@ namespace GraphManagerApp;
 /// </summary>
 public partial class MainWindow : Window {
     public MainWindow() {
+        DataContext = new ViewModel();
+
         InitializeComponent();
     }
 
+
     private void OnClickAddNode(object sender, MouseButtonEventArgs e) {
-        AddNodeOnCanvas(MyCanvas,
+        /*AddNodeOnCanvas(MyCanvas,
             Mouse.GetPosition(MyCanvas).X,
-            Mouse.GetPosition(MyCanvas).Y, 50);
+            Mouse.GetPosition(MyCanvas).Y, 50);*/
     }
 
     private void OnClickRemove(object sender, MouseButtonEventArgs e) {
         if (e.OriginalSource is Shape activeRec) {
-            MyCanvas.Children.Remove(activeRec);
+            //MyCanvas.Children.Remove(activeRec);
         }
     }
 
@@ -37,7 +40,7 @@ public partial class MainWindow : Window {
         if (startPoint == default) {
             startPoint = new Point(cx, cy);
         } else {
-            AddLine(MyCanvas, startPoint.X, startPoint.Y, cx, cy);
+            //AddLine(MyCanvas, startPoint.X, startPoint.Y, cx, cy);
 
             startPoint = default;
         }
@@ -46,8 +49,10 @@ public partial class MainWindow : Window {
     private void ManageLeftButtonDown(object sender, MouseButtonEventArgs e) {
         // TODO amélioration : https://stackoverflow.com/questions/9212873/binding-radiobuttons-group-to-a-property-in-wpf
         if (AddNode.IsChecked == true) {
+            startPoint = default;
             OnClickAddNode(sender, e);
         } else if (Remove.IsChecked == true) {
+            startPoint = default;
             OnClickRemove(sender, e);
         }
     }

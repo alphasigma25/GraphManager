@@ -11,9 +11,26 @@
             <RadioButton x:Name="AddEdge" GroupName="CanvasManager" Content="Add Edge" Margin="5"></RadioButton>
             <RadioButton x:Name="Remove" GroupName="CanvasManager" Content="Remove" Margin="5"></RadioButton>
         </StackPanel>
-        <Canvas x:Name="MyCanvas" MouseLeftButtonDown="ManageLeftButtonDown" 
-                Focusable="True" HorizontalAlignment="Stretch" Margin="20"
-                VerticalAlignment="Stretch" Background="#FFF8F8F8" 
-                Cursor="Cross"/>
+        <ItemsControl ItemsSource="{Binding Path=Nodes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas MouseLeftButtonDown="ManageLeftButtonDown" 
+                        Focusable="True" HorizontalAlignment="Stretch" Margin="20"
+                        VerticalAlignment="Stretch" Background="#FFF8F8F8" 
+                        Cursor="Cross"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <Ellipse Width="50" Height="50" 
+                             Canvas.Left="{Binding Path=X}"
+                             Canvas.Top="{Binding Path=Y}"
+                             Fill = "White"
+                             StrokeThickness = "1"
+                             Stroke = "Black"
+                             ></Ellipse>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DockPanel>
 </Window>
