@@ -1,9 +1,9 @@
 ﻿namespace GraphManager.Model;
 
-public class Node {
+public record class Node(double X = 0, double Y = 0) {
 
-    public void Delete() {
-        Edges.ForEach(e => {
+    public IEnumerable<Edge> Delete() {
+        foreach (var e in Edges) {
             if (e.N1 != this) {
                 e.N1.Edges.Remove(e);
             } else if (e.N2 != this) {
@@ -15,7 +15,8 @@ public class Node {
                 // prévenir
                 throw new Exception("Edge not linked to node edge list");
             }
-        });
+            yield return e;
+        }
         Edges.Clear();
     }
 
